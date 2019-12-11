@@ -1,6 +1,7 @@
 import React from 'react';
-// import Post from './Post';
+import Post from './Post';
 import axios from 'axios';
+import Title from '../components/Title';
 import {
     Route,
     Link,
@@ -24,16 +25,26 @@ class App extends React.Component {
     componentDidMount() {
         this.getPosts()
     };
-    
+
 
     render(){
         return (
             <div className='App'>
+                <a href="/"><strong>Home</strong></a>
                 <Router>
                     {this.state.posts.map(post => (
-                        <Switch>
-                            <p>{post.title}</p>
-                        </Switch>
+                        <>
+                            <Switch key={post.id}>
+                                <Route exact path="/">
+                                    <Link to={`/${post.id}`}>
+                                        <Title title={post.title} />
+                                    </Link>
+                                </Route>
+                            </Switch>
+                            <Route path={`/${post.id}`}>
+                                <Post />
+                            </Route>
+                        </>
                     ))}
                 </Router>
             </div>
