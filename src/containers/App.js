@@ -1,6 +1,7 @@
 import React from 'react';
 import Post from './Post';
 import axios from 'axios';
+import About from '../components/About';
 import Title from '../components/Title';
 import {
     Route,
@@ -17,7 +18,6 @@ class App extends React.Component {
 
     getPosts () {
         axios.get('https://jsonplaceholder.typicode.com/posts').then((res) => {
-            console.log(res);
             this.setState({posts: res.data});
         })
     };
@@ -30,8 +30,9 @@ class App extends React.Component {
     render(){
         return (
             <div className='App'>
-                <a href="/"><strong>Home</strong></a>
                 <Router>
+                    <Link exact to="/"><strong>Home</strong></Link> |&nbsp;
+                    <Link to="/about"><strong>About</strong></Link>
                     {this.state.posts.map(post => (
                         <>
                             <Switch key={post.id}>
@@ -46,6 +47,9 @@ class App extends React.Component {
                             </Route>
                         </>
                     ))}
+                    <Route path={`/about`}>
+                        <About />
+                    </Route>
                 </Router>
             </div>
         )
