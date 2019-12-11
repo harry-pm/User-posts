@@ -42,7 +42,7 @@ class Post extends Component {
             <input type="submit" value="Submit"/>
         </form> */}
         {this.state.comments.map(comment => (
-            <Comment comment={comment} />
+            <Comment comment={comment} key={comment.id}/>
         ))}
       </>
     )

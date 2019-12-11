@@ -31,11 +31,11 @@ class App extends React.Component {
         return (
             <div className='App'>
                 <Router>
-                    <Link exact to="/"><strong>Home</strong></Link> |&nbsp;
+                    <Link exact='true' to="/"><strong>Home</strong></Link> |&nbsp;
                     <Link to="/about"><strong>About</strong></Link>
                     {this.state.posts.map(post => (
-                        <>
-                            <Switch key={post.id}>
+                        <React.Fragment key={post.id}>
+                            <Switch>
                                 <Route exact path="/">
                                     <Link to={`/${post.id}`}>
                                         <Title title={post.title} />
@@ -43,9 +43,9 @@ class App extends React.Component {
                                 </Route>
                             </Switch>
                             <Route path={`/${post.id}`}>
-                                <Post post={post}/>
+                                <Post className='post' post={post}/>
                             </Route>
-                        </>
+                        </React.Fragment>
                     ))}
                     <Route path={`/about`}>
                         <About />
