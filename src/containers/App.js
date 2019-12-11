@@ -42,7 +42,7 @@ class App extends React.Component {
                                 </Route>
                             </Switch>
                             <Route path={`/${post.id}`}>
-                                <Post />
+                                <Post post={post}/>
                             </Route>
                         </>
                     ))}
